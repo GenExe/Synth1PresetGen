@@ -114,7 +114,8 @@ namespace MidiVstTest
 
         void StartPresetRecording(object sender, EventArgs e)
         {
-            PresetRecording();
+            var BackgroundThread = new Thread(new ThreadStart(PresetRecording)) {IsBackground = true};
+            BackgroundThread.Start();
         }
 
         void PresetRecording()
