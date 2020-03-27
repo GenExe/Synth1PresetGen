@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <Import Project="packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
+  <Import Project="packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" />
+  <Import Project="packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" />
+  <Import Project="packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" />
+  <Import Project="packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{E341738C-DF27-4A50-9D1E-B0CCF3D63631}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MidiVstTest</RootNamespace>
+    <AssemblyName>MidiVstTest</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Jacobi.Vst.Core">
+      <HintPath>..\NativeLibraries\Jacobi.Vst.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Jacobi.Vst.Interop">
+      <HintPath>..\NativeLibraries\Jacobi.Vst.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\NativeLibraries\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form\EditParametersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\EditParametersForm.Designer.cs">
+      <DependentUpon>EditParametersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MixerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MixerForm.Designer.cs">
+      <DependentUpon>MixerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HostCommandStub.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NAudio\RecordableMixerStream32.cs" />
+    <Compile Include="NAudio\VSTStream.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\PresetDifferenceCalculator.cs" />
+    <Compile Include="Utility\Synth1Preset.cs" />
+    <Compile Include="Utility\Synth1PresetHandler.cs" />
+    <Compile Include="Utility\UtilityAudio.cs" />
+    <Compile Include="VST.cs" />
+    <Compile Include="VSTForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VSTForm.Designer.cs">
+      <DependentUpon>VSTForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
+    <Analyzer Include="packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form\EditParametersForm.resx">
+      <DependentUpon>EditParametersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSTForm.resx">
+      <DependentUpon>VSTForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Synth1Presets\001.sy1" />
+    <None Include="Synth1Presets\002.sy1" />
+    <None Include="Synth1Presets\003.sy1" />
+    <None Include="Synth1Presets\004.sy1" />
+    <None Include="Synth1Presets\005.sy1" />
+    <None Include="Synth1Presets\006.sy1" />
+    <None Include="Synth1Presets\007.sy1" />
+    <None Include="Synth1Presets\008.sy1" />
+    <None Include="Synth1Presets\009.sy1" />
+    <None Include="Synth1Presets\010.sy1" />
+    <None Include="Synth1Presets\011.sy1" />
+    <None Include="Synth1Presets\012.sy1" />
+    <None Include="Synth1Presets\013.sy1" />
+    <None Include="Synth1Presets\014.sy1" />
+    <None Include="Synth1Presets\015.sy1" />
+    <None Include="Synth1Presets\016.sy1" />
+    <None Include="Synth1Presets\017.sy1" />
+    <None Include="Synth1Presets\018.sy1" />
+    <None Include="Synth1Presets\019.sy1" />
+    <None Include="Synth1Presets\020.sy1" />
+    <None Include="Synth1Presets\021.sy1" />
+    <None Include="Synth1Presets\022.sy1" />
+    <None Include="Synth1Presets\023.sy1" />
+    <None Include="Synth1Presets\024.sy1" />
+    <None Include="Synth1Presets\025.sy1" />
+    <None Include="Synth1Presets\026.sy1" />
+    <None Include="Synth1Presets\027.sy1" />
+    <None Include="Synth1Presets\028.sy1" />
+    <None Include="Synth1Presets\029.sy1" />
+    <None Include="Synth1Presets\030.sy1" />
+    <None Include="Synth1Presets\031.sy1" />
+    <None Include="Synth1Presets\032.sy1" />
+    <None Include="Synth1Presets\033.sy1" />
+    <None Include="Synth1Presets\034.sy1" />
+    <None Include="Synth1Presets\035.sy1" />
+    <None Include="Synth1Presets\036.sy1" />
+    <None Include="Synth1Presets\037.sy1" />
+    <None Include="Synth1Presets\038.sy1" />
+    <None Include="Synth1Presets\039.sy1" />
+    <None Include="Synth1Presets\040.sy1" />
+    <None Include="Synth1Presets\041.sy1" />
+    <None Include="Synth1Presets\042.sy1" />
+    <None Include="Synth1Presets\043.sy1" />
+    <None Include="Synth1Presets\044.sy1" />
+    <None Include="Synth1Presets\045.sy1" />
+    <None Include="Synth1Presets\046.sy1" />
+    <None Include="Synth1Presets\047.sy1" />
+    <None Include="Synth1Presets\048.sy1" />
+    <None Include="Synth1Presets\049.sy1" />
+    <None Include="Synth1Presets\050.sy1" />
+    <None Include="Synth1Presets\051.sy1" />
+    <None Include="Synth1Presets\052.sy1" />
+    <None Include="Synth1Presets\053.sy1" />
+    <None Include="Synth1Presets\054.sy1" />
+    <None Include="Synth1Presets\055.sy1" />
+    <None Include="Synth1Presets\056.sy1" />
+    <None Include="Synth1Presets\057.sy1" />
+    <None Include="Synth1Presets\058.sy1" />
+    <None Include="Synth1Presets\059.sy1" />
+    <None Include="Synth1Presets\060.sy1" />
+    <None Include="Synth1Presets\061.sy1" />
+    <None Include="Synth1Presets\062.sy1" />
+    <None Include="Synth1Presets\063.sy1" />
+    <None Include="Synth1Presets\064.sy1" />
+    <None Include="Synth1Presets\065.sy1" />
+    <None Include="Synth1Presets\066.sy1" />
+    <None Include="Synth1Presets\067.sy1" />
+    <None Include="Synth1Presets\068.sy1" />
+    <None Include="Synth1Presets\069.sy1" />
+    <None Include="Synth1Presets\070.sy1" />
+    <None Include="Synth1Presets\071.sy1" />
+    <None Include="Synth1Presets\072.sy1" />
+    <None Include="Synth1Presets\073.sy1" />
+    <None Include="Synth1Presets\074.sy1" />
+    <None Include="Synth1Presets\075.sy1" />
+    <None Include="Synth1Presets\076.sy1" />
+    <None Include="Synth1Presets\077.sy1" />
+    <None Include="Synth1Presets\078.sy1" />
+    <None Include="Synth1Presets\079.sy1" />
+    <None Include="Synth1Presets\080.sy1" />
+    <None Include="Synth1Presets\081.sy1" />
+    <None Include="Synth1Presets\082.sy1" />
+    <None Include="Synth1Presets\083.sy1" />
+    <None Include="Synth1Presets\084.sy1" />
+    <None Include="Synth1Presets\085.sy1" />
+    <None Include="Synth1Presets\086.sy1" />
+    <None Include="Synth1Presets\087.sy1" />
+    <None Include="Synth1Presets\088.sy1" />
+    <None Include="Synth1Presets\089.sy1" />
+    <None Include="Synth1Presets\090.sy1" />
+    <None Include="Synth1Presets\091.sy1" />
+    <None Include="Synth1Presets\092.sy1" />
+    <None Include="Synth1Presets\093.sy1" />
+    <None Include="Synth1Presets\094.sy1" />
+    <None Include="Synth1Presets\095.sy1" />
+    <None Include="Synth1Presets\096.sy1" />
+    <None Include="Synth1Presets\097.sy1" />
+    <None Include="Synth1Presets\098.sy1" />
+    <None Include="Synth1Presets\099.sy1" />
+    <None Include="Synth1Presets\100.sy1" />
+    <None Include="Synth1Presets\101.sy1" />
+    <None Include="Synth1Presets\102.sy1" />
+    <None Include="Synth1Presets\103.sy1" />
+    <None Include="Synth1Presets\104.sy1" />
+    <None Include="Synth1Presets\105.sy1" />
+    <None Include="Synth1Presets\106.sy1" />
+    <None Include="Synth1Presets\107.sy1" />
+    <None Include="Synth1Presets\108.sy1" />
+    <None Include="Synth1Presets\109.sy1" />
+    <None Include="Synth1Presets\110.sy1" />
+    <None Include="Synth1Presets\111.sy1" />
+    <None Include="Synth1Presets\112.sy1" />
+    <None Include="Synth1Presets\113.sy1" />
+    <None Include="Synth1Presets\114.sy1" />
+    <None Include="Synth1Presets\115.sy1" />
+    <None Include="Synth1Presets\116.sy1" />
+    <None Include="Synth1Presets\117.sy1" />
+    <None Include="Synth1Presets\118.sy1" />
+    <None Include="Synth1Presets\119.sy1" />
+    <None Include="Synth1Presets\120.sy1" />
+    <None Include="Synth1Presets\121.sy1" />
+    <None Include="Synth1Presets\122.sy1" />
+    <None Include="Synth1Presets\123.sy1" />
+    <None Include="Synth1Presets\124.sy1" />
+    <None Include="Synth1Presets\125.sy1" />
+    <None Include="Synth1Presets\126.sy1" />
+    <None Include="Synth1Presets\127.sy1" />
+    <None Include="Synth1Presets\128.sy1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Synth1Presets\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
+  </Target>
+</Project>
