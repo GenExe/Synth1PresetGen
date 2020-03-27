@@ -57,7 +57,6 @@ This project is licensed under the GNU GPL V3 License - see the [LICENSE.md](LIC
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+*  https://github.com/microDRUM
+
 
