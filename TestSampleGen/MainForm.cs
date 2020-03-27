@@ -119,40 +119,72 @@ namespace MidiVstTest
 
         void PresetRecording()
         {
-            int i = 0;
+            int programNumber = 0;
+            int testDataCount = 0;
 
-            while (i < 129)
+            // Synth1 can max save 12800 programs
+            while (programNumber < 12800)
             {
                 if (!UtilityAudio.IsStreamingToDisk())
                 {
-                    VSTForm.vst.pluginContext.PluginCommandStub.SetProgram(i);
-                    UtilityAudio.SaveStream(Path.Combine(recordDestinationPath, "Test" + i + ".wav"));
-                    UtilityAudio.StartStreamingToDisk();
+                    VSTForm.vst.pluginContext.PluginCommandStub.SetProgram(programNumber);
+                    var programmName = VSTForm.vst.pluginContext.PluginCommandStub.GetProgramName();
 
-                    const byte midiNote = 60; // C4
-                    byte midiVelocity = 100;
-
-                    progressLog1.LogMessage(Color.Blue, "TestSample recording from presets started...");
-
-                    UtilityAudio.StartReadNonRealtime();
-
-                    // only bother with the keys that trigger midi notes
-                    if (VSTForm.vst != null && midiNote != 0)
+                    // step over empty programs
+                    if (programmName != "initial sound")
                     {
-                        VSTForm.vst.MIDI_NoteOn(midiNote, midiVelocity);
+                        UtilityAudio.SaveStream(Path.Combine(recordDestinationPath, "Test" + testDataCount + ".wav"));
+
+                        // start audio recording
+                        UtilityAudio.StartStreamingToDisk();
+
+                        const byte midiNote = 60; // C4
+                        byte midiVelocity = 100;
+
+                        progressLog1.LogMessage(Color.Blue, "TestSample No. " + testDataCount +" recording from presets started...");
+
+                        UtilityAudio.StartReadNonRealtime();
+
+                        // only bother with the keys that trigger midi notes
+                        if (VSTForm.vst != null && midiNote != 0)
+                        {
+                            // start synth processing
+                            VSTForm.vst.MIDI_NoteOn(midiNote, midiVelocity);
+                        }
+
+                        // sleep for duration how long the note is hold
+                        Thread.Sleep(7);
+
+                        midiVelocity = 0;
+
+                        if (VSTForm.vst != null && midiNote != 0)
+                        {
+                            // stop synth processing
+                            VSTForm.vst.MIDI_NoteOn(midiNote, midiVelocity);
+                        }
+
+                        var testDataXml =
+                            new XDocument(
+                                new XElement("Synth1Testdata",
+                                    new XElement("TestdataCount", testDataCount),
+                                    new XElement("PresetName", programmName)
+                                )
+                            );
+
+                        for (int i = 0; i < 99; i++)
+                        {
+                            var parameter = new XElement("Parameter",
+                                new XAttribute("index", i), new XAttribute("vstValue", VSTForm.vst.pluginContext.PluginCommandStub.GetParameter(i)));
+
+                            testDataXml.Element("Synth1Testdata")?.Add(parameter);
+                        }
+
+                        testDataXml.Save(Path.Combine(recordDestinationPath, "Test" + testDataCount + ".xml"));
+
+                        testDataCount++;
                     }
 
-                    Thread.Sleep(7);
-
-                    midiVelocity = 0;
-
-                    // only bother with the keys that trigger midi notes
-                    if (VSTForm.vst != null && midiNote != 0)
-                    {
-                        VSTForm.vst.MIDI_NoteOn(midiNote, midiVelocity);
-                    }
-
-                    i++;
+                    programNumber++;
                 }
 
                 Thread.Sleep(5);
