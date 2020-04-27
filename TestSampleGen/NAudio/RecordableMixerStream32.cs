@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using MidiVstTest.Utility;
+using TestSampleGen.Utility;
 using NAudio.Wave;
 
 // Copied from the microDRUM project

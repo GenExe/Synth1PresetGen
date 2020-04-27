@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using System.Xml.Linq;
 
-namespace MidiVstTest.Utility
+namespace TestSampleGen.Utility
 {
     static class Synth1PresetUtility
     {

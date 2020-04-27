@@ -8,7 +8,7 @@ using CommonUtils.VSTPlugin;
 // https://github.com/microDRUM
 // I think it is created by massimo.bernava@gmail.com
 // Modified by perivar@nerseth.com, patrick0steurer@gmail.com
-namespace MidiVstTest
+namespace TestSampleGen
 {
     partial class VSTForm
     {

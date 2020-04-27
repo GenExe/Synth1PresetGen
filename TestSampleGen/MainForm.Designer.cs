@@ -10,7 +10,7 @@ using NAudio.Utils;
 using Jacobi.Vst.Core;
 using System.Xml.Linq;
 
-namespace MidiVstTest
+namespace TestSampleGen
 {
 	partial class MainForm
 	{

@@ -7,7 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 
-namespace MidiVstTest.Utility
+namespace TestSampleGen.Utility
 {
     public class Synth1Preset
     {

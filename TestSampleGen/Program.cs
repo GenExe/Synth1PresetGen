@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MidiVstTest
+namespace TestSampleGen
 {
 	/// <summary>
 	/// Class with program entry point.

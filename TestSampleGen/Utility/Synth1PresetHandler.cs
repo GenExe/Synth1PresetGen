@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
 
-namespace MidiVstTest.Utility
+namespace TestSampleGen.Utility
 {
     public static class Synth1PresetHandler
     {

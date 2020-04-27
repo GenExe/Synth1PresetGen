@@ -9,9 +9,9 @@ using NAudio.Wave;
 
 using Jacobi.Vst.Core;
 using System.Xml.Linq;
-using MidiVstTest.Utility;
+using TestSampleGen.Utility;
 
-namespace MidiVstTest
+namespace TestSampleGen
 {
     /// <summary>
     /// Description of MainForm.

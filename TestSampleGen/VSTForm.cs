@@ -3,14 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using CommonUtils.VSTPlugin;
-using MidiVstTest.Utility;
 using TestSampleGen;
+using TestSampleGen.Utility;
 
 // Copied from the microDRUM project
 // https://github.com/microDRUM
 // I think it is created by massimo.bernava@gmail.com
 // Modified by perivar@nerseth.com, patrick0steurer@gmail.com
-namespace MidiVstTest
+namespace TestSampleGen
 {
 	public partial class VSTForm : Form
 	{
