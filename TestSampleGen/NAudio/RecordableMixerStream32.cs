@@ -27,6 +27,10 @@ namespace NAudio.Wave
 		private string streamToDiskFileName;
 		WaveFileWriter writer;
 
+		// Variable for record length; bytes / 4048
+        private const int RecordLength = 2000;             //1743083;
+        public static int _recordLengthCounter = 1;
+
 		/// <summary>
 		/// Creates a new 32 bit WaveMixerStream
 		/// </summary>
@@ -133,8 +137,9 @@ namespace NAudio.Wave
 		/// Starts the Stream To Disk recording if a file name to save the stream to has been setup
 		/// </summary>
 		public void StartStreamingToDisk()
-		{
-			if (!String.IsNullOrEmpty(streamToDiskFileName))
+        {
+            _recordLengthCounter = 1;
+            if (!String.IsNullOrEmpty(streamToDiskFileName))
 			{
 				streamToDisk = true;
 			}
@@ -162,8 +167,8 @@ namespace NAudio.Wave
 		public void StopStreamingToDisk()
 		{
 			streamToDisk = false;
-			if(writer!=null) writer.Close();
-		}
+            writer?.Close();
+        }
 
 		/// <summary>
 		/// Setup the StreamMixToDisk file and initalise the WaveFileWriter
@@ -227,11 +232,13 @@ namespace NAudio.Wave
 					//TODO: better check for empty wave
 					if (UtilityAudio.IsStreamingToDisk())
 					{
-						if (readBuffer[0].Equals(0x00) && readBuffer[count - 1].Equals(0x00))
+                        _recordLengthCounter++;
+						if (_recordLengthCounter > RecordLength)
 						{
 							
 							UtilityAudio.StopStreamingToDisk();
 						}
+						
 					}
 
 					bytesRead = Math.Max(bytesRead, readFromThisStream);

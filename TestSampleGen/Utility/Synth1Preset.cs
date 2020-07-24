@@ -7,7 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 
-namespace TestSampleGen.Utility
+namespace MidiVstTest.Utility
 {
     public class Synth1Preset
     {
@@ -26,7 +26,8 @@ namespace TestSampleGen.Utility
                 {
                     var parameternumber = int.Parse(Regex.Match(fileLines[i], "^[0-9]?[0-9]?[0-9]?").Value);
                     var parameterValue = int.Parse(Regex.Match(fileLines[i], "[0-9]?[0-9]?[0-9]?$").Value);
-                    Parameters.Add(parameternumber, parameterValue);
+                    if (parameterValue == 45057) parameterValue = 0;
+                    if(!Parameters.ContainsKey(parameternumber)) Parameters.Add(parameternumber, parameterValue);
                 }
             }
         }
